@@ -169,7 +169,8 @@ function ReelItem({ reel }: { reel: { title: string, category: string, video: st
       {/* Video Player */}
       <video 
         ref={videoRef}
-        src={reel.video} 
+        src={`${reel.video}#t=0.001`}
+        preload="metadata"
         muted 
         loop 
         playsInline
