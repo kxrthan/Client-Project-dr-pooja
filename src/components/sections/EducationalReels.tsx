@@ -153,14 +153,44 @@ export function EducationalReels() {
 
 function ReelItem({ reel }: { reel: { title: string, category: string, video: string } }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Apply auto-play via observer only on touch/mobile devices (under 1024px)
+          if (window.innerWidth <= 1024) {
+            if (entry.isIntersecting) {
+              videoRef.current?.play().catch(() => {});
+            } else {
+              videoRef.current?.pause();
+            }
+          }
+        });
+      },
+      { threshold: 0.6 } // Play when at least 60% of the video is visible
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div 
+      ref={containerRef}
       // 1 item on mobile, 2 on tablet, exactly 4 on desktop (with gap-6 = 24px)
       className="relative aspect-[9/16] w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] shrink-0 snap-start rounded-3xl overflow-hidden group cursor-pointer border border-border/50 shadow-lg bg-black"
-      onMouseEnter={() => videoRef.current?.play()}
+      onMouseEnter={() => {
+        if (window.innerWidth > 1024) {
+          videoRef.current?.play().catch(() => {});
+        }
+      }}
       onMouseLeave={() => {
-        if (videoRef.current) {
+        if (window.innerWidth > 1024 && videoRef.current) {
           videoRef.current.pause();
           videoRef.current.currentTime = 0;
         }
