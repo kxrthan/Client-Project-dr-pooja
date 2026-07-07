@@ -120,50 +120,9 @@ export function EducationalReels() {
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {reels.map((reel, index) => {
-              const videoRef = useRef<HTMLVideoElement>(null);
-
-              return (
-                <div 
-                  key={index} 
-                  // 1 item on mobile, 2 on tablet, exactly 4 on desktop (with gap-6 = 24px)
-                  className="relative aspect-[9/16] w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] shrink-0 snap-start rounded-3xl overflow-hidden group cursor-pointer border border-border/50 shadow-lg bg-black"
-                  onMouseEnter={() => videoRef.current?.play()}
-                  onMouseLeave={() => {
-                    if (videoRef.current) {
-                      videoRef.current.pause();
-                      videoRef.current.currentTime = 0;
-                    }
-                  }}
-                >
-                  {/* Video Player */}
-                  <video 
-                    ref={videoRef}
-                    src={reel.video} 
-                    muted 
-                    loop 
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                  />
-                  
-                  {/* Gradient Overlay for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
-                  
-                  {/* Content */}
-                  <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between z-10 pointer-events-none">
-                    <div className="self-end bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-[10px] uppercase tracking-widest text-white/90 border border-white/10 shadow-sm">
-                      {reel.category}
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-white font-medium text-lg md:text-xl leading-tight drop-shadow-md">
-                        {reel.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {reels.map((reel, index) => (
+              <ReelItem key={index} reel={reel} />
+            ))}
           </div>
         </div>
         
@@ -189,5 +148,49 @@ export function EducationalReels() {
 
       </div>
     </SectionWrapper>
+  );
+}
+
+function ReelItem({ reel }: { reel: { title: string, category: string, video: string } }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  return (
+    <div 
+      // 1 item on mobile, 2 on tablet, exactly 4 on desktop (with gap-6 = 24px)
+      className="relative aspect-[9/16] w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] shrink-0 snap-start rounded-3xl overflow-hidden group cursor-pointer border border-border/50 shadow-lg bg-black"
+      onMouseEnter={() => videoRef.current?.play()}
+      onMouseLeave={() => {
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.currentTime = 0;
+        }
+      }}
+    >
+      {/* Video Player */}
+      <video 
+        ref={videoRef}
+        src={reel.video} 
+        muted 
+        loop 
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+      />
+      
+      {/* Gradient Overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-70 transition-opacity" />
+      
+      {/* Content */}
+      <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between z-10 pointer-events-none">
+        <div className="self-end bg-black/40 backdrop-blur-md rounded-full px-4 py-1.5 text-[10px] uppercase tracking-widest text-white/90 border border-white/10 shadow-sm">
+          {reel.category}
+        </div>
+        
+        <div>
+          <h3 className="text-white font-medium text-lg md:text-xl leading-tight drop-shadow-md">
+            {reel.title}
+          </h3>
+        </div>
+      </div>
+    </div>
   );
 }

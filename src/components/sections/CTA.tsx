@@ -1,3 +1,5 @@
+"use client";
+
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Calendar } from "lucide-react";

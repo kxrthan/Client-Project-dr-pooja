@@ -1,33 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, CheckCircle2, ChevronRight, User, Phone, Mail } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, CheckCircle2, ChevronRight, X } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function BookingModal({ children }: { children: React.ReactNode }) {
   const [step, setStep] = useState(1);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  // Demo dates (Next 5 days)
-  const getDemoDates = () => {
-    const dates = [];
-    for (let i = 1; i <= 5; i++) {
-      const d = new Date();
-      d.setDate(d.getDate() + i);
-      dates.push({
-        full: d.toISOString(),
-        dayStr: d.toLocaleDateString('en-US', { weekday: 'short' }),
-        dateNum: d.getDate(),
-        monthStr: d.toLocaleDateString('en-US', { month: 'short' })
-      });
-    }
-    return dates;
-  };
-  const demoDates = getDemoDates();
 
   const timeSlots = ["10:00 AM", "11:30 AM", "02:00 PM", "03:45 PM", "05:15 PM"];
 
@@ -37,7 +21,7 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
       // Reset state after closing animation
       setTimeout(() => {
         setStep(1);
-        setSelectedDate(null);
+        setSelectedDate(undefined);
         setSelectedTime(null);
       }, 300);
     }
@@ -45,21 +29,25 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
-      <DialogContent className="w-[95vw] max-h-[90vh] sm:max-w-[550px] p-0 bg-background border-border overflow-y-auto overflow-x-hidden rounded-3xl sm:rounded-[2rem]">
+      <DialogTrigger render={children as React.ReactElement} />
+      <DialogContent showCloseButton={false} className="w-[95vw] sm:max-w-[550px] p-0 bg-background border-border overflow-hidden rounded-3xl sm:rounded-[2rem]">
         
         {/* Subtle decorative background */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-pink-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none" />
 
         <div className="relative p-6 sm:p-8 z-10">
-          <DialogHeader className="mb-8">
+          <DialogHeader className="mb-6 flex flex-row items-center justify-between space-y-0">
             <DialogTitle className="text-2xl font-bold tracking-tight flex items-center gap-2">
-              <Calendar className="w-6 h-6 text-primary" />
+              <CalendarIcon className="w-6 h-6 text-primary" />
               Book Consultation
             </DialogTitle>
+            <DialogClose render={
+              <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full">
+                <X className="h-4 w-4" />
+                <span className="sr-only">Close</span>
+              </Button>
+            } />
           </DialogHeader>
 
           <AnimatePresence mode="wait">
@@ -74,24 +62,16 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
                 {/* Date Selection */}
                 <div>
                   <h4 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
-                    <Calendar className="w-4 h-4" /> Select Date
+                    <CalendarIcon className="w-4 h-4" /> Select Date
                   </h4>
-                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
-                    {demoDates.map((date, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setSelectedDate(date.full)}
-                        className={`flex-shrink-0 flex flex-col items-center justify-center w-[72px] h-[88px] rounded-2xl border transition-all duration-300 ${
-                          selectedDate === date.full
-                            ? "bg-primary text-primary-foreground border-primary shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                            : "bg-secondary/30 border-border/50 text-foreground hover:border-primary/50"
-                        }`}
-                      >
-                        <span className="text-xs font-medium uppercase tracking-wider opacity-80 mb-1">{date.dayStr}</span>
-                        <span className="text-2xl font-bold">{date.dateNum}</span>
-                        <span className="text-[10px] uppercase font-medium mt-0.5">{date.monthStr}</span>
-                      </button>
-                    ))}
+                  <div className="flex justify-center bg-card/50 border border-border/50 rounded-2xl p-2 sm:p-4">
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={setSelectedDate}
+                      disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                      className="rounded-xl w-full flex justify-center"
+                    />
                   </div>
                 </div>
 
@@ -145,7 +125,7 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
                 
                 <div className="bg-secondary/30 border border-border/50 p-6 rounded-2xl max-w-sm text-sm text-muted-foreground leading-relaxed shadow-sm">
                   <p className="mb-3 font-medium text-foreground">
-                    You selected {selectedTime} on {selectedDate && new Date(selectedDate).toLocaleDateString()}.
+                    You selected {selectedTime} on {selectedDate && selectedDate.toLocaleDateString()}.
                   </p>
                   <p className="italic text-primary/80">
                     "This is a design prototype. Appointment booking will be integrated with your preferred system after project approval."
