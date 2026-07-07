@@ -43,7 +43,7 @@ export function WhyChooseUs() {
           {/* Features - Left Side */}
           <div className="lg:col-span-4 space-y-12 order-2 lg:order-1">
             {features.slice(0, 3).map((feature, idx) => (
-              <div key={idx} className="group">
+              <div key={idx} className="group pl-6 sm:pl-10 md:pl-0">
                 <div className="mb-4">
                   <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
                     <CheckCircle2 className="w-5 h-5" />
@@ -73,7 +73,7 @@ export function WhyChooseUs() {
           {/* Features - Right Side */}
           <div className="lg:col-span-4 space-y-12 order-3 lg:order-3">
             {features.slice(3, 5).map((feature, idx) => (
-              <div key={idx} className="group">
+              <div key={idx} className="group pl-6 sm:pl-10 md:pl-0">
                 <div className="mb-4">
                   <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
                     <CheckCircle2 className="w-5 h-5" />

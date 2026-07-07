@@ -6,7 +6,7 @@ export function DoctorProfile() {
     <SectionWrapper id="doctor-profile" className="bg-secondary/20">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Content */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-7 space-y-8 pl-6 sm:pl-10 md:pl-0">
           <div>
             <h2 className="text-sm font-semibold text-primary uppercase tracking-widest mb-3">Meet Your Doctor</h2>
             <h3 className="text-4xl md:text-5xl font-bold mb-6">Dr. Pooja Reddy</h3>

@@ -1,6 +1,7 @@
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, Calendar } from "lucide-react";
+import { BookingModal } from "@/components/ui/BookingModal";
 
 export function CTA() {
   return (
@@ -28,10 +29,12 @@ export function CTA() {
 
         {/* Buttons */}
         <div className="relative z-10 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-4 w-full lg:w-auto shrink-0">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base font-medium h-14 px-8 rounded-full flex items-center gap-2 transition-all hover:scale-105 shadow-xl shadow-primary/20">
-            <Calendar className="w-5 h-5" />
-            Book Consultation
-          </Button>
+          <BookingModal>
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base font-medium h-14 px-8 rounded-full flex items-center gap-2 transition-all hover:scale-105 shadow-xl shadow-primary/20">
+              <Calendar className="w-5 h-5" />
+              Book Consultation
+            </Button>
+          </BookingModal>
           <Button size="lg" variant="outline" className="h-14 px-8 rounded-full border-white/10 hover:bg-white/10 text-white text-base font-medium flex items-center gap-2 bg-white/5 backdrop-blur-md transition-all hover:scale-105">
             <MessageCircle className="w-5 h-5 text-green-400" />
             WhatsApp

@@ -75,7 +75,7 @@ export function Testimonials() {
           {loopedTestimonials.map((t, idx) => (
             <div 
               key={idx} 
-              className="relative w-[320px] md:w-[400px] shrink-0 bg-secondary/30 backdrop-blur-md border border-border/50 rounded-3xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between"
+              className="relative w-[280px] sm:w-[320px] md:w-[400px] shrink-0 bg-secondary/30 backdrop-blur-md border border-border/50 rounded-3xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between"
             >
               <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/10 rotate-180 pointer-events-none" />
               

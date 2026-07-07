@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   description: "Healthy skin begins with expert care. Book a consultation for evidence-based dermatology and personalized treatment.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

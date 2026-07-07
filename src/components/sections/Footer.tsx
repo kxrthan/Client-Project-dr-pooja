@@ -7,7 +7,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
-          <div className="space-y-6">
+          <div className="space-y-6 pl-6 sm:pl-10 md:pl-0">
             <h3 className="text-2xl font-bold text-foreground">Dr. Pooja Reddy</h3>
             <p className="text-muted-foreground">
               Premium dermatology and cosmetic skin clinic committed to evidence-based care and exceptional results.
@@ -26,7 +26,7 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="space-y-6">
+          <div className="space-y-6 pl-6 sm:pl-10 md:pl-0">
             <h4 className="text-lg font-semibold">Contact Us</h4>
             <ul className="space-y-4">
               <li className="flex gap-3 text-muted-foreground">
@@ -45,7 +45,7 @@ export function Footer() {
           </div>
 
           {/* Timings */}
-          <div className="space-y-6">
+          <div className="space-y-6 pl-6 sm:pl-10 md:pl-0">
             <h4 className="text-lg font-semibold">Clinic Timings</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-muted-foreground">
@@ -73,7 +73,7 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-6">
+          <div className="space-y-6 pl-6 sm:pl-10 md:pl-0">
             <h4 className="text-lg font-semibold">Quick Links</h4>
             <ul className="space-y-3">
               <li><Link href="#treatments" className="text-muted-foreground hover:text-primary transition-colors">Treatments</Link></li>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { BookingModal } from "@/components/ui/BookingModal";
 
 const navLinks = [
   { name: "Treatments", href: "#treatments" },
@@ -34,10 +35,10 @@ export function Navbar() {
           : "bg-transparent border-transparent py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1400px] w-full mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="#" className="flex items-center gap-2">
+          <Link href="#" className="flex items-center gap-2 pl-2 sm:pl-4 md:pl-0">
             <span className="text-2xl font-bold tracking-tight text-foreground">
               Dr. Pooja<span className="text-primary">.</span>
             </span>
@@ -54,9 +55,11 @@ export function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6">
-              Book Consult
-            </Button>
+            <BookingModal>
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6">
+                Book Consult
+              </Button>
+            </BookingModal>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -89,9 +92,11 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full mt-4 h-12">
-                Book Consultation
-              </Button>
+              <BookingModal>
+                <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full mt-4 h-12">
+                  Book Consultation
+                </Button>
+              </BookingModal>
             </div>
           </motion.div>
         )}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { BookingModal } from "@/components/ui/BookingModal";
 
 export function Hero() {
   return (
@@ -47,17 +48,19 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 pt-2"
           >
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base font-medium h-12 px-8 rounded-full transition-all group shadow-xl shadow-primary/20 hover:shadow-primary/40">
-              Book Consultation
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <BookingModal>
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base font-medium h-12 px-8 rounded-full transition-all group shadow-xl shadow-primary/20 hover:shadow-primary/40">
+                Book Consultation
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </BookingModal>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex items-center gap-6 pt-6 border-t border-border/40"
+            className="flex items-center gap-3 sm:gap-6 pt-6 border-t border-border/40"
           >
             <div>
               <p className="text-4xl font-light text-foreground tracking-tight">20k+</p>
@@ -82,7 +85,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="relative h-[450px] lg:h-[550px] w-full max-w-[450px] rounded-[2.5rem] overflow-hidden group shadow-2xl border border-white/5"
+            className="relative h-[380px] sm:h-[450px] lg:h-[550px] w-full max-w-[450px] rounded-[2.5rem] overflow-hidden group shadow-2xl border border-white/5"
           >
             <img 
               src="/doctor-profile.jfif" 
