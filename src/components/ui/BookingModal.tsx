@@ -48,7 +48,7 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[550px] p-0 bg-background border-border overflow-hidden rounded-[2rem]">
+      <DialogContent className="w-[95vw] max-h-[90vh] sm:max-w-[550px] p-0 bg-background border-border overflow-y-auto overflow-x-hidden rounded-3xl sm:rounded-[2rem]">
         
         {/* Subtle decorative background */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
@@ -100,7 +100,7 @@ export function BookingModal({ children }: { children: React.ReactNode }) {
                   <h4 className="text-sm font-medium text-muted-foreground mb-4 flex items-center gap-2">
                     <Clock className="w-4 h-4" /> Select Time
                   </h4>
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                     {timeSlots.map((time, idx) => (
                       <button
                         key={idx}

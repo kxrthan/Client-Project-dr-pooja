@@ -52,7 +52,7 @@ export function PatientJourney() {
 
       <div className="relative max-w-4xl mx-auto">
         {/* Vertical Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border/50 -translate-x-1/2 hidden md:block" />
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-border/50 -translate-x-1/2" />
 
         <div className="space-y-12 relative z-10">
           {steps.map((step, idx) => (
@@ -62,20 +62,20 @@ export function PatientJourney() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${
+              className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-16 pl-16 md:pl-0 ${
                 idx % 2 === 0 ? "md:flex-row-reverse" : ""
               }`}
             >
               {/* Content Box */}
-              <div className={`w-full md:w-1/2 flex ${idx % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
-                <div className={`bg-card/50 backdrop-blur-sm p-6 rounded-2xl border border-border/50 max-w-sm w-full shadow-lg text-center md:text-left ${idx % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
+              <div className={`w-full md:w-1/2 flex justify-start ${idx % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
+                <div className={`bg-card/50 backdrop-blur-sm p-6 rounded-2xl border border-border/50 max-w-sm w-full shadow-lg text-left ${idx % 2 === 0 ? "md:text-left" : "md:text-right"}`}>
                   <h4 className="text-xl font-semibold mb-2">{step.title}</h4>
                   <p className="text-muted-foreground">{step.description}</p>
                 </div>
               </div>
 
               {/* Icon / Node */}
-              <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-background border-2 border-primary text-primary shadow-[0_0_15px_rgba(212,175,55,0.3)] hidden md:flex z-20">
+              <div className="absolute left-6 md:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 flex items-center justify-center w-12 h-12 rounded-full bg-background border-2 border-primary text-primary shadow-[0_0_15px_rgba(212,175,55,0.3)] z-20">
                 <step.icon className="w-5 h-5" />
               </div>
 
